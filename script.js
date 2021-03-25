@@ -1,18 +1,41 @@
-// Pseudo example
+// Minimum Viable Product - MVP
 
-// Create an app object (gottaCatchEmAll)
+// Create an App object {GetMeBeer}
 
-// Initialize preset data in the dedicated properties
-// - apiURL
-// - apiKey
-// - userQuery
+GetMeeBeerApp = {}
 
-// Create a method (getUserQuery) to update the variable (userQuery) based on user input
+GetMeeBeerApp.init = {}
 
-// Create a method (getPokemon) to make API calls, which takes the user input as a parameter (userQuery)
-// When the API call is successful, display the result by appending the data to the results div
-// If the API call fails, display an error message
 
-// Create an init method to kick off the setup of the application
-// - calls the local method (getPokemon) for a random Pokemon to start
-// - add a 'change' event listener to call the local method (getUserQuery), to track user input
+fetch('https://api.openbrewerydb.org/breweries')
+.then(function(response){
+  return response.json();
+})
+.then(function(jsonResult){
+  console.log('It worked!', jsonResult);
+};
+
+// Generate a dropdown with the list of breweries accordingy the user filter selection (we need to review the API, in order to make the filters and dropdown as optimal as possible)
+
+//Create an init method when the user starts the search
+
+//Fetch the desired data using the correct params
+
+// Append the results to the page
+
+// Clear the results before the next search
+
+// ** Extra features
+
+
+//Allow the user to select from the search list, and add them to their preferred list
+
+//Add a clear user selection button
+
+//Add multiple search filters
+
+//Add a form that allows the user to have their brewery added to the list
+
+// Add a map section to reflect the selected area
+
+
