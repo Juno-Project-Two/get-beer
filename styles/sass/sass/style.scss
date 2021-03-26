@@ -5,8 +5,10 @@
 @import "./setup";
 @import "./fonts";
 @import "./typography";
+@import "./body";
 
 // Header & Footer
-// @import "./header";
+@import "./header";
+@import "./main";
 
-// @import "./footer";
+@import "./footer";

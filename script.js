@@ -13,7 +13,7 @@ fetch('https://api.openbrewerydb.org/breweries')
 })
 .then(function(jsonResult){
   console.log('It worked!', jsonResult);
-};
+});
 
 // Generate a dropdown with the list of breweries accordingy the user filter selection (we need to review the API, in order to make the filters and dropdown as optimal as possible)
 

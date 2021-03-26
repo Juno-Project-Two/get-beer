@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!--Style Css Link-->
-        <link rel="stylesheet" href="./styles/style.css" />
-        <!--Font Awesome-->
-        <script src="https://kit.fontawesome.com/e25c9e9fc4.js" crossorigin="anonymous"></script>
-        <title>Second Project</title>
-    </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Style Css Link-->
+  <link rel="stylesheet" href="./styles/style.css" />
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/e25c9e9fc4.js"
+    crossorigin="anonymous"></script>
+  <title>Second Project</title>
+</head>
+
 <body>
-    <header>
-    <!--Header-->
-        <h1>Project Two!</h1>
-    </header>
-    <main>
-    <!--Main Section-->    
-        <section>
-            <div class="wrapper">
-                <form>
-                    <select>
-                        <option value="none"-</option>
-                        <option value="first">First</option>
-                        <option value="second">Second</option>
-                        <option value="third">Third</option>
-                    </select>
-                    <input type="submit" value="option" />
-                </form>
-            </div>
-        </section>    
-        <section>
-        <!--Results Section-->        
-            <div class="append_wrapper">
-                <ul class="results"></ul>
-            </div>
-        </section>
-    </main> 
-    <footer>
-    <!--Footer Section-->        
-        <p><a href="https://junocollege.com/" target="_blank">Copyright &#169 Juno College</a></p>
-    </footer>
-    <!--JS Script-->
-    <script src="script.js"></script>
+  <!--Header-->
+  <header class="header">
+    <h1 class="header__title">Welcome to Brewery Selector!</h1>
+    <!-- Beer background -->
+    <img class="header__bg-image" src="./assets/images/beer-header.jpg"
+      alt="Beer header">
+  </header>
+  <!-- Main section -->
+  <main class="main">
+    <!--Main Section-->
+    <!-- Filters section -->
+    <section class="main__filters-section">
+      <!-- Choose a State -->
+      <form>
+        <select>
+          <option selected disabled value="none">Choose State</option>
+          <option value="first">First</option>
+          <option value="second">Second</option>
+          <option value="third">Third</option>
+        </select>
+      </form>
+      <!-- Filter by City -->
+      <form>
+        <select disabled>
+          <option value="none">Filter by city</option>
+          <option value="first">First</option>
+          <option value="second">Second</option>
+          <option value="third">Third</option>
+        </select>
+      </form>
+    </section>
+    <!-- Results and Favourites wrapper -->
+    <div class="wrapper">
+      <!-- Results Section-->
+      <section class="results-wrapper wrapper__section">
+        <div class="append_wrapper">
+          <ul class="results"></ul>
+        </div>
+      </section>
+      <!-- Favourites Section -->
+      <section class="favourites-wrapper wrapper__section">
+        <!-- <h2>Favourites</h2> -->
+        <div class="append_wrapper">
+          <ul class="results"></ul>
+        </div>
+      </section>
+    </div>
+  </main>
+  <!--Footer Section-->
+  <footer class="footer">
+    <p>
+      <a href="https://junocollege.com/" target="_blank">Copyright &#169
+        Juno College
+      </a>
+    </p>
+  </footer>
+  <!--JS Script-->
+  <script src="script.js"></script>
 </body>
 </html>
