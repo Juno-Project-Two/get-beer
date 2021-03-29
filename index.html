@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +11,6 @@
     crossorigin="anonymous"></script>
   <title>Second Project</title>
 </head>
-
 <body>
   <!--Header-->
   <header class="header">
@@ -49,18 +47,168 @@
     <div class="wrapper">
       <!-- Results Section-->
       <section class="results-wrapper wrapper__section">
-        <div class="append_wrapper">
-          <ul class="results"></ul>
-        </div>
+        <ul id="results-list" class="results">
+          <article class="brewery-card">
+            <ul class="brewery-card__content">
+              <li
+                class="brewery-card__content__name brewery-card__content__item">
+                Brewery Name
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Country</span>
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-city"></i>
+                <span>City</span>
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-road"></i>
+                <span>Street</span>
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-phone-alt"></i>
+                <span>Phone</span>
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-beer"></i>
+                <span>Type</span>
+              </li>
+            </ul>
+            <div class="brewery-card__actions">
+              <button class="brewery-card__actions__like-btn">
+                <i class="fas fa-heart"></i>
+                Like
+              </button>
+              <a target="_blank" class="website" rel="noopener noreferrer">
+                <i class="fas fa-globe"></i>
+                <span>Website</span>
+              </a>
+            </div>
+          </article>
+        </ul>
       </section>
       <!-- Favourites Section -->
       <section class="favourites-wrapper wrapper__section">
         <!-- <h2>Favourites</h2> -->
-        <div class="append_wrapper">
-          <ul class="results"></ul>
-        </div>
+        <ul id="favourites-list" class="results">
+          <article class="brewery-card">
+            <ul class="brewery-card__content">
+              <li
+                class="brewery-card__content__name brewery-card__content__item">
+                Brewery Name
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-map-marker-alt"></i>
+                Country
+              </li>
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-city"></i>
+                <span>Oklahoma</span>
+              </li>
+
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-road"></i>
+                <span>Spanish Fort</span>
+              </li>
+
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-phone-alt"></i>
+                <span>lorem ipsum</span>
+              </li>
+
+              <li
+                class="brewery-card__content__text brewery-card__content__item">
+                <i class="fas fa-beer"></i>
+                <span>Type</span>
+              </li>
+            </ul>
+            <div class="brewery-card__actions">
+              <button class="brewery-card__actions__like-btn active">
+                <i class="fas fa-heart"></i>
+                Unlike
+              </button>
+
+              <a target="_blank" class="website" rel="noopener noreferrer">
+                <i class="fas fa-globe"></i>
+                <span>Website</span>
+              </a>
+            </div>
+          </article>
+        </ul>
       </section>
     </div>
+    <!--Submission form  -->
+    <section class="main__form-section">
+      <h2 class="main__form-section__title">
+        Hey, are we missing a brewery?
+      </h2>
+      <!--Submit Form  -->
+      <p class="main__form-section__message">
+        Please fill out the form below.
+      </p>
+      <!--Contact main information  -->
+      <form id="contact-form" class="main__form-section__form">
+        <fieldset id='contact-fieldset'>
+          <div class="main__form-section__form__fields-control is-group">
+            <label for="name">
+              <input id="name-input" type="text" placeholder="Your name" />
+              <span class="invalid-msg">
+              </span>
+            </label>
+            <label for="email">
+              <input id="email-input" type="email" placeholder="Your email">
+              <span class="invalid-msg">
+              </span>
+            </label>
+          </div>
+          <div class="main__form-section__form__fields-control is-group">
+            <label for="state">
+              <input id="state-input" type="text" placeholder="State" />
+              <span class="invalid-msg">
+              </span>
+            </label>
+            <label for="city">
+              <input id="city-input" type="city" placeholder="City">
+              <span class="invalid-msg">
+              </span>
+            </label>
+          </div>
+          <div class="main__form-section__form__fields-control">
+            <label for="phone">
+              <input id="phone-input" type="text" placeholder="Phone" />
+              <span class="invalid-msg">
+              </span>
+            </label>
+          </div>
+          <div class="main__form-section__form__fields-control">
+            <!--Message -->
+            <label for="message">
+              <textarea id="message-input" name="message" placeholder="Message"
+                cols="30" rows="80"></textarea>
+              <span class="invalid-msg">
+              </span>
+            </label>
+          </div>
+          <!--Contact main information button  -->
+          <button class="button" type="submit">
+            Submit message
+            <i class="fas fa-long-arrow-alt-right icon"></i>
+          </button>
+        </fieldset>
+        <div id="success-msg-element" class="success-message">
+        </div>
+      </form>
+    </section>
   </main>
   <!--Footer Section-->
   <footer class="footer">
