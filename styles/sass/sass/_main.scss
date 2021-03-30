@@ -54,7 +54,10 @@
 
     &__section {
       display: flex;
-      align-items: center;
+      position: relative;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
       border: 3px solid $dark-blue;
       border-radius: 4px;
       padding: 10px;
@@ -72,26 +75,81 @@
         width: 100%;
         height: 100%;
 
-        &.favourites-wrapper {
+        &.favorites-wrapper {
           width: 40%;
           flex-shrink: 0;
           margin-left: 30px;
         }
       }
 
+      &__heading {
+        font-size: 25px;
+        font-family: $font-raleway;
+        font-weight: 600;
+        color: $black-two;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 16px;
+
+        span {
+          font-family: $font-lora
+        }
+      }
+
+      .results {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(220px, 260px);
+        grid-template-rows: max-content;
+        height: 100%;
+        justify-content: center;
+        justify-items: center;
+        max-height: 476px;
+        min-height: 450px;
+        overflow-y: scroll;
+        position: relative;
+        width: 100%;
+
+        &:empty::before,
+        .helper-message {
+          font-size: 25px;
+          font-weight: 500;
+          font-family: $font-lora;
+          opacity: .5;
+          width: 80%;
+          text-align: center;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &.favorites-list {
+          max-height: 434px;
+        }
+
+        &.favorites-list:empty::before {
+          content: 'Add your favorites breweries here';
+        }
+
+        @media screen and(min-width:940px) {
+          grid-template-columns: repeat(auto-fill, 220px);
+        }
+      }
+
       // Brewery Card Styles
       .brewery-card {
         align-items: flex-start;
+        justify-content: space-between;
         background-color: $white;
         border-radius: 4px;
         box-shadow: 0 10px 40px -10px rgba(0, 64, 128, .2);
         display: inline-flex;
         flex-direction: column;
-        margin: 8px;
-        max-width: 280px;
         padding: 30px 15px 15px;
         position: relative;
-        width: calc(100% - 24px);
+        width: 100%;
+        max-width: 280px;
 
         &__content {
           width: 100%;
@@ -104,15 +162,15 @@
             align-items: flex-start;
             width: 100%;
             text-align: left;
-            font-size: 14px;
+            font-size: 11px;
             margin-bottom: 14px;
             font-family: $font-raleway;
 
             .fas {
               color: $dark-blue;
               margin-right: 6px;
-              font-size: 20px;
-              min-width: 35px;
+              font-size: 16px;
+              min-width: 20px;
             }
 
             &:last-child {
@@ -124,11 +182,11 @@
             display: flex;
             justify-content: center;
             font-family: $font-lora;
-            font-size: 22px;
+            font-size: 16px;
             text-align: center;
             width: 100%;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: $black-two;
           }
         }
@@ -138,7 +196,7 @@
           width: 100%;
           justify-content: space-between;
           align-items: center;
-          margin-top: 30px;
+          margin-top: 25px;
 
           &__like-btn,
           .website {
@@ -146,7 +204,7 @@
             border: none;
             outline: none;
             border: 1px solid $brown-grey;
-            font-size: 14px;
+            font-size: 11px;
             border-radius: 4px;
             font-family: $font-raleway;
             padding: 0 12px;
@@ -176,33 +234,12 @@
           .website {
             border: none;
             font-size: 12px;
+            text-decoration: none;
+
+            .fas {
+              margin-right: 4px;
+            }
           }
-        }
-
-        @media screen and (min-width: 1140px) {
-          width: calc(50% - 24px);
-        }
-
-        @media screen and (min-width: 1600px) {
-          width: calc(33% - 24px);
-        }
-      }
-    }
-
-    .results {
-      display: block;
-      text-align: center;
-      width: 100%;
-      min-height: 450px;
-      max-height: 500px;
-      height: 100%;
-      overflow-y: scroll;
-    }
-
-    .favourites-wrapper {
-      .results {
-        .brewery-card {
-          width: calc(100% - 24px);
         }
       }
     }
@@ -257,6 +294,16 @@
         padding: 0;
       }
 
+      .success-message {
+        display: none;
+        align-items: center;
+        min-height: 354px;
+        text-align: center;
+        font-style: italic;
+        font-size: 24px;
+        color: $light-grey;
+      }
+
       &__fields-control {
         display: flex;
         align-items: center;
@@ -279,45 +326,63 @@
         label {
           width: 100%;
           position: relative;
-        }
 
-        input,
-        textarea {
-          height: 48px;
-          border-radius: 4px;
-          width: 100%;
-          background-color: $white;
-          color: #a7a7a7;
-          font-family: $font-lora;
-          padding: 10px 14px;
-          font-size: 14px;
-          border: none;
-          outline: none;
+          input,
+          textarea {
+            height: 48px;
+            border-radius: 4px;
+            width: 100%;
+            background-color: $white;
+            color: #a7a7a7;
+            font-family: $font-lora;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: none;
+            outline: none;
 
-          &.is-invalid {
-            border: 2px solid $danger;
-            color: $danger;
+            &.is-invalid {
+              border: 2px solid $danger;
+              color: $danger;
+            }
+
+            &.is-invalid+.invalid-msg {
+              display: inline-block;
+            }
           }
-        }
 
-        input::placeholder {
-          color: #a7a7a7;
-        }
+          input::placeholder {
+            color: #a7a7a7;
+          }
 
-        textarea {
-          min-height: 175px;
-          resize: none;
+          textarea {
+            min-height: 175px;
+            resize: none;
+          }
+
+          .invalid-msg {
+            position: absolute;
+            display: none;
+            left: 0;
+            bottom: -14px;
+            font-family: $font-lora;
+            font-size: 10px;
+            color: $danger;
+            font-weight: 600;
+            font-style: italic;
+          }
         }
       }
 
 
       .button {
-        margin-top: 14px;
+        margin-top: 18px;
         background-color: transparent;
         color: $yellow;
         border: none;
         text-transform: uppercase;
         font-weight: 500;
+        cursor: pointer;
+        padding-left: 0;
         font-size: 16px;
         outline: none;
 

@@ -303,6 +303,7 @@ body {
           align-items: flex-start;
   min-height: 100vh;
   min-width: 360px;
+  background-color: #f6f5f5;
 }
 
 .header {
@@ -453,9 +454,17 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  position: relative;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border: 3px solid #495057;
   border-radius: 4px;
   padding: 10px;
@@ -475,7 +484,7 @@ body {
     width: 100%;
     height: 100%;
   }
-  .main .wrapper__section.favourites-wrapper {
+  .main .wrapper__section.favorites-wrapper {
     width: 40%;
     -ms-flex-negative: 0;
         flex-shrink: 0;
@@ -483,10 +492,78 @@ body {
   }
 }
 
+.main .wrapper__section__heading {
+  font-size: 25px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  color: #333333;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.main .wrapper__section__heading span {
+  font-family: "Lora", sans-serif;
+}
+
+.main .wrapper__section .results {
+  display: -ms-grid;
+  display: grid;
+  gap: 16px;
+  -ms-grid-columns: minmax(220px, 260px);
+      grid-template-columns: minmax(220px, 260px);
+  -ms-grid-rows: max-content;
+      grid-template-rows: -webkit-max-content;
+      grid-template-rows: max-content;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  justify-items: center;
+  max-height: 476px;
+  min-height: 450px;
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
+}
+
+.main .wrapper__section .results:empty::before,
+.main .wrapper__section .results .helper-message {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: "Lora", sans-serif;
+  opacity: .5;
+  width: 80%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.main .wrapper__section .results.favorites-list {
+  max-height: 434px;
+}
+
+.main .wrapper__section .results.favorites-list:empty::before {
+  content: 'Add your favorites breweries here';
+}
+
+@media screen and (min-width: 940px) {
+  .main .wrapper__section .results {
+    -ms-grid-columns: (220px)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 220px);
+  }
+}
+
 .main .wrapper__section .brewery-card {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   background-color: #f6f6f6;
   border-radius: 4px;
   -webkit-box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
@@ -498,11 +575,10 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 8px;
-  max-width: 280px;
   padding: 30px 15px 15px;
   position: relative;
-  width: calc(100% - 24px);
+  width: 100%;
+  max-width: 280px;
 }
 
 .main .wrapper__section .brewery-card__content {
@@ -528,7 +604,7 @@ body {
           align-items: flex-start;
   width: 100%;
   text-align: left;
-  font-size: 14px;
+  font-size: 11px;
   margin-bottom: 14px;
   font-family: "Raleway", sans-serif;
 }
@@ -536,8 +612,8 @@ body {
 .main .wrapper__section .brewery-card__content__item .fas {
   color: #495057;
   margin-right: 6px;
-  font-size: 20px;
-  min-width: 35px;
+  font-size: 16px;
+  min-width: 20px;
 }
 
 .main .wrapper__section .brewery-card__content__item:last-child {
@@ -552,11 +628,11 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   font-family: "Lora", sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   text-align: center;
   width: 100%;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   color: #333333;
 }
 
@@ -571,7 +647,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .main .wrapper__section .brewery-card__actions__like-btn,
@@ -580,7 +656,7 @@ body {
   border: none;
   outline: none;
   border: 1px solid #999999;
-  font-size: 14px;
+  font-size: 11px;
   border-radius: 4px;
   font-family: "Raleway", sans-serif;
   padding: 0 12px;
@@ -608,32 +684,11 @@ body {
 .main .wrapper__section .brewery-card__actions .website {
   border: none;
   font-size: 12px;
+  text-decoration: none;
 }
 
-@media screen and (min-width: 1140px) {
-  .main .wrapper__section .brewery-card {
-    width: calc(50% - 24px);
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .main .wrapper__section .brewery-card {
-    width: calc(33% - 24px);
-  }
-}
-
-.main .wrapper .results {
-  display: block;
-  text-align: center;
-  width: 100%;
-  min-height: 450px;
-  max-height: 500px;
-  height: 100%;
-  overflow-y: scroll;
-}
-
-.main .wrapper .favourites-wrapper .results .brewery-card {
-  width: calc(100% - 24px);
+.main .wrapper__section .brewery-card__actions .website .fas {
+  margin-right: 4px;
 }
 
 @media screen and (min-width: 768px) {
@@ -701,6 +756,18 @@ body {
   padding: 0;
 }
 
+.main__form-section__form .success-message {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 354px;
+  text-align: center;
+  font-style: italic;
+  font-size: 24px;
+  color: #f2f2f2;
+}
+
 .main__form-section__form__fields-control {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -728,8 +795,8 @@ body {
   position: relative;
 }
 
-.main__form-section__form__fields-control input,
-.main__form-section__form__fields-control textarea {
+.main__form-section__form__fields-control label input,
+.main__form-section__form__fields-control label textarea {
   height: 48px;
   border-radius: 4px;
   width: 100%;
@@ -742,40 +809,59 @@ body {
   outline: none;
 }
 
-.main__form-section__form__fields-control input.is-invalid,
-.main__form-section__form__fields-control textarea.is-invalid {
+.main__form-section__form__fields-control label input.is-invalid,
+.main__form-section__form__fields-control label textarea.is-invalid {
   border: 2px solid #ff7171;
   color: #ff7171;
 }
 
-.main__form-section__form__fields-control input::-webkit-input-placeholder {
+.main__form-section__form__fields-control label input.is-invalid + .invalid-msg,
+.main__form-section__form__fields-control label textarea.is-invalid + .invalid-msg {
+  display: inline-block;
+}
+
+.main__form-section__form__fields-control label input::-webkit-input-placeholder {
   color: #a7a7a7;
 }
 
-.main__form-section__form__fields-control input:-ms-input-placeholder {
+.main__form-section__form__fields-control label input:-ms-input-placeholder {
   color: #a7a7a7;
 }
 
-.main__form-section__form__fields-control input::-ms-input-placeholder {
+.main__form-section__form__fields-control label input::-ms-input-placeholder {
   color: #a7a7a7;
 }
 
-.main__form-section__form__fields-control input::placeholder {
+.main__form-section__form__fields-control label input::placeholder {
   color: #a7a7a7;
 }
 
-.main__form-section__form__fields-control textarea {
+.main__form-section__form__fields-control label textarea {
   min-height: 175px;
   resize: none;
 }
 
+.main__form-section__form__fields-control label .invalid-msg {
+  position: absolute;
+  display: none;
+  left: 0;
+  bottom: -14px;
+  font-family: "Lora", sans-serif;
+  font-size: 10px;
+  color: #ff7171;
+  font-weight: 600;
+  font-style: italic;
+}
+
 .main__form-section__form .button {
-  margin-top: 14px;
+  margin-top: 18px;
   background-color: transparent;
   color: #e9c46a;
   border: none;
   text-transform: uppercase;
   font-weight: 500;
+  cursor: pointer;
+  padding-left: 0;
   font-size: 16px;
   outline: none;
 }
