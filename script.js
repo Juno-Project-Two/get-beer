@@ -327,7 +327,7 @@ GetMeeBeerApp.validateFormOnSubmit = () => {
     }
 
     if (nameValue && emailValue && cityValue && stateValue && phoneValue && messageValue) {
-      successSubmitMessageElement.textContent = `Thank you for your submission ${GetMeeBeerApp.formData.name}!`;
+      successSubmitMessageElement.textContent = `Thank you for your submission ${GetMeeBeerApp.formData.name} 	&#127867!`;
       fieldsetElement.style.display = 'none';
       successSubmitMessageElement.style.display = 'flex';
     }
