@@ -484,7 +484,7 @@ body {
     width: 100%;
     height: 100%;
   }
-  .main .wrapper__section.favorites-wrapper {
+  .main .wrapper__section.favourite-wrapper {
     width: 40%;
     -ms-flex-negative: 0;
         flex-shrink: 0;
@@ -520,11 +520,17 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   justify-items: center;
-  max-height: 476px;
+  max-height: 436px;
   min-height: 450px;
   overflow-y: scroll;
   position: relative;
   width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.main .wrapper__section .results::-webkit-scrollbar {
+  display: none;
 }
 
 .main .wrapper__section .results:empty::before,
@@ -542,12 +548,8 @@ body {
           transform: translate(-50%, -50%);
 }
 
-.main .wrapper__section .results.favorites-list {
-  max-height: 434px;
-}
-
-.main .wrapper__section .results.favorites-list:empty::before {
-  content: 'Add your favorites breweries here';
+.main .wrapper__section .results.favourite-list:empty::before {
+  content: 'Add your favourite breweries here';
 }
 
 @media screen and (min-width: 940px) {
@@ -809,17 +811,6 @@ body {
   outline: none;
 }
 
-.main__form-section__form__fields-control label input.is-invalid,
-.main__form-section__form__fields-control label textarea.is-invalid {
-  border: 2px solid #ff7171;
-  color: #ff7171;
-}
-
-.main__form-section__form__fields-control label input.is-invalid + .invalid-msg,
-.main__form-section__form__fields-control label textarea.is-invalid + .invalid-msg {
-  display: inline-block;
-}
-
 .main__form-section__form__fields-control label input::-webkit-input-placeholder {
   color: #a7a7a7;
 }
@@ -839,18 +830,6 @@ body {
 .main__form-section__form__fields-control label textarea {
   min-height: 175px;
   resize: none;
-}
-
-.main__form-section__form__fields-control label .invalid-msg {
-  position: absolute;
-  display: none;
-  left: 0;
-  bottom: -14px;
-  font-family: "Lora", sans-serif;
-  font-size: 10px;
-  color: #ff7171;
-  font-weight: 600;
-  font-style: italic;
 }
 
 .main__form-section__form .button {

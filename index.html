@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +11,6 @@
     crossorigin="anonymous"></script>
   <title>Second Project</title>
 </head>
-
 <body>
   <!--Header-->
   <header class="header">
@@ -89,86 +87,72 @@
         </select>
       </form>
     </section>
-    <!-- Results and favorites wrapper -->
+    <!-- Results and favourite wrapper -->
     <div class="wrapper">
       <!-- Results Section-->
       <section class="results-wrapper wrapper__section">
         <h2 class="wrapper__section__heading">
-        	&#127867 Search result
+          🍻Search result
         </h2>
         <ul id="results-list" class="results search-list">
         </ul>
       </section>
-      <!-- Favorites Section -->
-      <section class="favorites-wrapper wrapper__section">
+      <!-- favourite Section -->
+      <section class="favourite-wrapper wrapper__section">
         <h2 class="wrapper__section__heading">
           ⭐Favourites
-          <span id="favorites-count">0/5</span>
+          <span id="favourite-count">0/5</span>
         </h2>
-        <ul id="favorites-list" class="results favorites-list">
+        <ul id="favourite-list" class="results favourite-list">
           <div class="helper-message">
             Add your favourite breweries here
           </div>
         </ul>
       </section>
     </div>
-
     <section class="main__form-section">
       <h2 class="main__form-section__title">
         Are we missing a brewery?
       </h2>
-
       <p class="main__form-section__message">
         Tell us about a brewery you think <br>
-        we should add by filling out the form below.
+        we should add by filling the form below.
       </p>
       <!--Contact main information  -->
       <form id="contact-form" class="main__form-section__form">
         <fieldset id='contact-fieldset'>
           <div class="main__form-section__form__fields-control is-group">
             <label for="name">
-              <input id="name-input" type="text" name="name"
+              <input required id="name-input" type="text" name="name"
                 placeholder="Your name" />
-              <span class="invalid-msg">
-              </span>
             </label>
             <label for="email">
-              <input id="email-input" name='email' type="email"
+              <input required id="email-input" name='email' type="email"
                 placeholder="Your email">
-              <span class="invalid-msg">
-              </span>
             </label>
           </div>
           <div class="main__form-section__form__fields-control is-group">
             <label for="state">
-              <input id="state-input" name="state" type="text"
+              <input required id="state-input" name="state" type="text"
                 placeholder="State" />
-              <span class="invalid-msg">
-              </span>
             </label>
             <label for="city">
-              <input id="city-input" name="city" type="city" placeholder="City">
-              <span class="invalid-msg">
-              </span>
+              <input required id="city-input" name="city" type="city"
+                placeholder="City">
             </label>
           </div>
           <div class="main__form-section__form__fields-control">
             <label for="phone">
-              <input id="phone-input" name="phone" type="text"
+              <input required id="phone-input" name="phone" type="text"
                 placeholder="Phone" />
-              <span class="invalid-msg">
-              </span>
             </label>
           </div>
           <div class="main__form-section__form__fields-control">
             <label for="message">
-              <textarea id="message-input" name="message" placeholder="Message"
-                cols="30" rows="80"></textarea>
-              <span class="invalid-msg">
-              </span>
+              <textarea required id="message-input" name="message"
+                placeholder="Message" cols="30" rows="80"></textarea>
             </label>
           </div>
-
           <!--Contact main information button  -->
           <button class="button" type="submit">
             Submit
@@ -191,5 +175,4 @@
   <!--JS Script-->
   <script src="script.js"></script>
 </body>
-
 </html>

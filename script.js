@@ -4,22 +4,22 @@
 
 // Fontawesome icons
 const fontawesomeIcons = {
-  state: '<i class="fas fa-map-marker-alt"></i>',
-  city: '<i class="fas fa-city"></i>',
-  phone: '<i class="fas fa-phone-alt"></i>',
-  breweryType: '<i class="fas fa-beer"></i>',
-  street: '<i class="fas fa-road"></i>',
-  heart: '<i class="fas fa-heart"></i>',
-  website: '<i class="fas fa-globe"></i>',
+  state: '<i title="State" class="fas fa-map-marker-alt"></i>',
+  city: '<i title="City" class="fas fa-city"></i>',
+  phone: '<i title="Phone" class="fas fa-phone-alt"></i>',
+  breweryType: '<i title="Brewery type" class="fas fa-beer"></i>',
+  street: '<i title="Street" class="fas fa-road"></i>',
+  heart: '<i title="Heart" class="fas fa-heart"></i>',
+  website: '<i title="Website" class="fas fa-globe"></i>',
   spinner: '<i class="fas fa-spinner fa-spin"></i>'
 };
 
 // Breweries list elements
 const resultsUlElement = document.getElementById('results-list');
-const favoritesUlElement = document.getElementById('favorites-list');
+const favouriteUlElement = document.getElementById('favourite-list');
 const selectStateElement = document.getElementById('select-state');
 const selectCityElement = document.getElementById('select-city');
-const favoritesCountElement = document.getElementById('favorites-count');
+const favouriteCountElement = document.getElementById('favourite-count');
 
 // Form elements
 const contactForm = document.getElementById('contact-form');
@@ -61,7 +61,7 @@ GetMeeBeerApp.formData = {
 GetMeeBeerApp.init = () => {
   GetMeeBeerApp.validateFormOnSubmit();
 
-  GetMeeBeerApp.showHelperMessage('Please select a state to see your list of Breweries');
+  GetMeeBeerApp.showHelperMessage('Select a State & City.');
 
   // State Dropdown
   selectStateElement.addEventListener('change', (event) => {
@@ -81,95 +81,79 @@ GetMeeBeerApp.init = () => {
 
   // Results list
   resultsUlElement.addEventListener('click', (event) => {
-    const targetButtonEl = event.target.closest('button');
+    const target = event.target;
 
-    if (targetButtonEl) {
-      const breweryCard = targetButtonEl.closest('article');
+    if (target.tagName === 'BUTTON' || target.parentNode.tagName === 'BUTTON') {
+      const breweryCardId = target.dataset.breweryid || target.parentNode.dataset.breweryid;
 
-      const breweryCardId = Number(breweryCard.id);
-
-      GetMeeBeerApp.addBreweryTofavoritesList(Number(breweryCardId));
+      GetMeeBeerApp.addBreweryTofavouriteList(Number(breweryCardId));
     }
   });
 
-  // Favorites list
-  favoritesUlElement.addEventListener('click', (event) => {
-    const targetButtonEl = event.target.closest('button');
+  // favourite list
+  favouriteUlElement.addEventListener('click', (event) => {
+    const target = event.target;
 
-    if (targetButtonEl) {
-      const breweryCard = targetButtonEl.closest('article');
+    if (target.tagName === 'BUTTON' || target.parentNode.tagName === 'BUTTON') {
+      const breweryCardId = target.dataset.breweryid || target.parentNode.dataset.breweryid;
 
-      const breweryCardId = Number(breweryCard.id);
-
-      GetMeeBeerApp.removeBreweryFromfavoritesList(breweryCardId);
+      GetMeeBeerApp.removeBreweryFromfavouriteList(Number(breweryCardId));
     }
   });
 };
 
-GetMeeBeerApp.createBreweryCard = (data) => {
-  const {
-    brewery_type,
-    city,
-    id,
-    liked,
-    name,
-    phone,
-    state,
-    street,
-    website_url,
-  } = data;
-
+GetMeeBeerApp.createBreweryCard = (breweryData) => {
   return `
-  <article id="${id}" class="brewery-card">
+  <article id="${breweryData.id}" class="brewery-card">
     <ul class="brewery-card__content">
       <li class="brewery-card__content__item brewery-card__content__name">
-        ${name}
+        ${breweryData.name}
       </li>
 
-      ${state ?
+      ${breweryData.state ?
         `<li class="brewery-card__content__item">
           ${fontawesomeIcons.state}
-          <span>${state}</span>
+          <span>${breweryData.state}</span>
          </li>` : ''
         }
 
-      ${city ?
+      ${breweryData.city ?
         `<li class="brewery-card__content__item">
           ${fontawesomeIcons.city}
-          <span>${city}</span>
+          <span>${breweryData.city}</span>
          </li>` : ''
         }
 
-      ${street ?
+      ${breweryData.street ?
         `<li class="brewery-card__content__item">
           ${fontawesomeIcons.street}
-          <span>${street}</span>
+          <span>${breweryData.street}</span>
          </li>` : ''
         }
 
-      ${phone ?
+      ${breweryData.phone ?
         `<li class="brewery-card__content__item">
           ${fontawesomeIcons.phone}
-          <span>${phone}</span>
+          <span>${breweryData.phone}</span>
          </li>` : ''
         }
 
-      ${brewery_type ?
+      ${breweryData.brewery_type ?
         `<li class="brewery-card__content__item">
           ${fontawesomeIcons.breweryType}
-          <span>${brewery_type}</span>
+          <span>${breweryData.brewery_type}</span>
          </li>` : ''
         }
     </ul>
 
     <div class="brewery-card__actions">
-      <button class="brewery-card__actions__like-btn ${liked ? 'active' :''}">
+      <button data-breweryid="${breweryData.id}" class="brewery-card__actions__like-btn ${breweryData.liked ? 'active' :''}">
         ${fontawesomeIcons.heart}
-        <span>${liked ? 'Remove' :'Add'}</span>
+        <span>${breweryData.liked ? 'Remove' :'Add'}</span>
       </button>
 
-      ${website_url ?
-        `<a href="${website_url}" target="_blank" rel="noopener noreferrer" class="website">
+      ${breweryData.website_url ?
+        `<a href="${breweryData.website_url}" target="_blank" rel="noopener noreferrer" class="website">
           ${fontawesomeIcons.website}
           <span>Website</span>
          </a>` : ''
@@ -179,13 +163,13 @@ GetMeeBeerApp.createBreweryCard = (data) => {
 `
 };
 
-GetMeeBeerApp.addBreweryTofavoritesList = (id) => {
+GetMeeBeerApp.addBreweryTofavouriteList = (id) => {
   const isPresent = GetMeeBeerApp.likedBreweries.some(brewery => brewery.id === id);
 
-  const favoritesBreweriesCount = GetMeeBeerApp.likedBreweries.length;
+  const favouriteBreweriesCount = GetMeeBeerApp.likedBreweries.length;
 
-  if (!isPresent && favoritesBreweriesCount < 5) {
-    const likedBrewery = GetMeeBeerApp.breweriesResults.find(brewery => brewery.id === id);
+  if (!isPresent && favouriteBreweriesCount < 5) {
+    const likedBrewery = GetMeeBeerApp.breweriesResults.filter(brewery => brewery.id === id)[0];
 
     const likedBreweryCardData = {
       ...likedBrewery,
@@ -194,17 +178,17 @@ GetMeeBeerApp.addBreweryTofavoritesList = (id) => {
 
     GetMeeBeerApp.likedBreweries.unshift(likedBreweryCardData);
 
-    favoritesCountElement.textContent = `${GetMeeBeerApp.likedBreweries.length}/5`;
+    favouriteCountElement.textContent = `${GetMeeBeerApp.likedBreweries.length}/5`;
 
-    GetMeeBeerApp.updateFavoritesList(GetMeeBeerApp.likedBreweries);
+    GetMeeBeerApp.updatefavouriteList(GetMeeBeerApp.likedBreweries);
   }
 };
 
-GetMeeBeerApp.removeBreweryFromfavoritesList = (id) => {
-  const updatedfavoritesList = GetMeeBeerApp.likedBreweries.filter(item => item.id !== id);
-  GetMeeBeerApp.likedBreweries = updatedfavoritesList;
-  favoritesCountElement.textContent = `${GetMeeBeerApp.likedBreweries.length}/5`;
-  GetMeeBeerApp.updateFavoritesList(GetMeeBeerApp.likedBreweries);
+GetMeeBeerApp.removeBreweryFromfavouriteList = (id) => {
+  const updatedfavouriteList = GetMeeBeerApp.likedBreweries.filter(item => item.id !== id);
+  GetMeeBeerApp.likedBreweries = updatedfavouriteList;
+  favouriteCountElement.textContent = `${GetMeeBeerApp.likedBreweries.length}/5`;
+  GetMeeBeerApp.updatefavouriteList(GetMeeBeerApp.likedBreweries);
 };
 
 GetMeeBeerApp.fetchBreweriesByState = (stateValue) => {
@@ -277,8 +261,8 @@ GetMeeBeerApp.updateResultsList = (items) => {
   resultsUlElement.innerHTML = items.map(cardData => GetMeeBeerApp.createBreweryCard(cardData)).join("");
 };
 
-GetMeeBeerApp.updateFavoritesList = (items) => {
-  favoritesUlElement.innerHTML = items.map(cardData => GetMeeBeerApp.createBreweryCard(cardData)).join("");
+GetMeeBeerApp.updatefavouriteList = (items) => {
+  favouriteUlElement.innerHTML = items.map(cardData => GetMeeBeerApp.createBreweryCard(cardData)).join("");
 };
 
 GetMeeBeerApp.clearDataBeforeFetch = () => {
@@ -295,39 +279,15 @@ GetMeeBeerApp.validateFormOnSubmit = () => {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const nameValue = nameInputElement.value.trim();
-    const emailValue = emailInputElement.value.trim();
-    const stateValue = stateInputElement.value.trim();
-    const cityValue = cityInputElement.value.trim();
-    const phoneValue = phoneInputElement.value.trim();
-    const messageValue = messageInputElement.value.trim();
-
-    if (!nameValue) {
-      GetMeeBeerApp.setInputError(nameInputElement, 'Please, enter a name');
-    }
-
-    if (!emailValue) {
-      GetMeeBeerApp.setInputError(emailInputElement, 'Please, enter an email');
-    }
-
-    if (!stateValue) {
-      GetMeeBeerApp.setInputError(stateInputElement, 'Please, enter a state');
-    }
-
-    if (!cityValue) {
-      GetMeeBeerApp.setInputError(cityInputElement, 'Please, enter a city');
-    }
-
-    if (!phoneValue) {
-      GetMeeBeerApp.setInputError(phoneInputElement, 'Please, enter a phone');
-    }
-
-    if (!messageValue) {
-      GetMeeBeerApp.setInputError(messageInputElement, 'Please, enter a message');
-    }
+    const nameValue = nameInputElement.value;
+    const emailValue = emailInputElement.value;
+    const stateValue = stateInputElement.value;
+    const cityValue = cityInputElement.value;
+    const phoneValue = phoneInputElement.value;
+    const messageValue = messageInputElement.value;
 
     if (nameValue && emailValue && cityValue && stateValue && phoneValue && messageValue) {
-      successSubmitMessageElement.textContent = `Thank you for your submission ${GetMeeBeerApp.formData.name} 	&#127867!`;
+      successSubmitMessageElement.textContent = `Thank you for your submission ${GetMeeBeerApp.formData.name}!`;
       fieldsetElement.style.display = 'none';
       successSubmitMessageElement.style.display = 'flex';
     }
@@ -338,21 +298,9 @@ GetMeeBeerApp.validateFormOnSubmit = () => {
     if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
       const targetInput = event.target;
 
-      if (targetInput.classList.contains('is-invalid')) {
-        targetInput.classList.remove('is-invalid');
-      }
-
-      GetMeeBeerApp.formData[targetInput.name] = targetInput.value.trim();
+      GetMeeBeerApp.formData[targetInput.name] = targetInput.value;
     }
   });
-};
-
-GetMeeBeerApp.setInputError = (inputEl, message) => {
-  const spanEl = inputEl.parentNode.querySelector('span');
-
-  spanEl.textContent = message;
-
-  inputEl.classList.add('is-invalid');
 };
 
 GetMeeBeerApp.init();
