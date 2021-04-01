@@ -28,6 +28,12 @@
       <form>
         <select id="select-state">
           <option value="none" disabled selected>Choose state</option>
+          <!--Toria: Maybe change attribute so that this option is not completely disabled but instead when clicked the setting returns to default "Choose State" but "value" = nothing selected-->
+
+          <!--Toria: May need to update code so that when page refreshes all options are set to default settings. Not just the "Filter by city" option-->
+
+          <!-- Toria: Also notitced that after the page is refreshed with the "Choose state" option still set to user's last input, ex. "California", the "Filter by city" options are no longer available, despite a state being selected. And if you click on the same state that is selected, the city's still do not appear. It is not only until you click on another option and then click back on that same option that the list of cities appear. 
+            I think code needs to be adjusted so that the list of cities always appear when a state is selected in all conditions-->
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
           <option value="Arizona">Arizona</option>
@@ -83,7 +89,9 @@
       <!-- Filter by City -->
       <form>
         <select id="select-city" disabled="true">
+            <!-- remember to refer to JS to see how disabled= "true" is switched off -->
           <option disabled selected value="none">Filter by city</option>
+            <!-- Toria: minor detail; reverse order of <option> attributes so that they are consistently named in same order-->
         </select>
       </form>
     </section>
@@ -96,6 +104,7 @@
         </h2>
         <ul id="results-list" class="results search-list">
         </ul>
+        <!-- Toria: note-to-self refer to JS to see how results are formed -->
       </section>
       <!-- favourite Section -->
       <section class="favourite-wrapper wrapper__section">
@@ -104,6 +113,14 @@
           <span id="favourite-count">0/5</span>
         </h2>
         <ul id="favourite-list" class="results favourite-list">
+            <!-- Toria: adding more than 5 didn't seem to break the code -->
+            <!-- Toria: minor detail: can we make the breweries collapsable so that the details of each brewery under favourites aren't displayed until expanded by user. Can we make them collapsed with only the name and city of brewery is displayed  -->
+
+            <!-- Toria: Can we give user options or how favourites are displayed? Ex. orders: alphabetical; (state, city), newest/oldest -->
+
+            <!-- Toria: Minor detail: Can we remove favourite limit or change limit? -->
+
+            <!-- Toria: Minor detail: Add/Remove favourite buttons are good. Another idea; specify "Add/Remove Favoutite" or make buttons just the heart logo but when user hovers over button it says what button is for in writing  -->
           <div class="helper-message">
             Add your favourite breweries here
           </div>
@@ -146,6 +163,7 @@
               <input required id="phone-input" name="phone" type="text"
                 placeholder="Phone" />
             </label>
+            <!-- Toria: Perhaps need to specify who's contact info is being asked of; the user's personal or the brewery's> -->
           </div>
           <div class="main__form-section__form__fields-control">
             <label for="message">
@@ -161,6 +179,9 @@
         </fieldset>
         <div id="success-submit-msg" class="success-message">
         </div>
+        <!-- Toria: email input parameters seem to be in place. Ex. email@email.com. State parameters don't seem to be in place. City paramaters don't seem to be in place(only alphacharacters excepted not in place). Phone number paramaters don't seem to be in place (only numeric charecters ex.)-->
+
+        <!-- Toria: What are the paramameters for a successful submit? Where does a submitted msg go? -->
       </form>
     </section>
   </main>
